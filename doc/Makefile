@@ -1,4 +1,4 @@
-NAME	= document
+NAME	= ftype
 STYL    = slide
 VIEWER  = qpdfview
 
@@ -7,8 +7,10 @@ all	: $(NAME).pdf
 ifeq ($(STYL),slide)
 # %.pdf	: %.md
 # 	pandoc -f markdown -t beamer -V theme:Singapore -H slide.tex -o $@ --pdf-engine=lualatex $<
-%.pdf	: %.md
-	pandoc -f markdown -t beamer -V theme:Madrid -H slide.tex -o $@ --pdf-engine=lualatex $<
+# %.pdf	: %.md
+# 	pandoc -f markdown -t beamer -V theme:Madrid -H slide.tex -o $@ --pdf-engine=lualatex $<
+%.pdf : %.md
+	marp --pdf $<
 else
 %.pdf	: Makefile %.tex
 	platex $(NAME)
